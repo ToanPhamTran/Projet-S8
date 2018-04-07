@@ -18,7 +18,7 @@ void InitSPI_Port(void)
 void InitSPI_mode(void)
 {
 	/*
-	 * La polarité est configuré par le registre UCCKPL
+	 * La polaritÃ© est configurÃ© par le registre UCCKPL
 	 * on configure le sens de direction de l'envoie du bit ici le bit de poid fort en premier
 	 */
 
@@ -32,7 +32,7 @@ void InitSPI_mode(void)
 }
 
 /*
- * Fonction permettant de transmettre un caractère au maitre
+ * Fonction permettant de transmettre un caractÃ¨re au maitre
  */
 void TXSPI_data(unsigned char c)
 {
@@ -41,7 +41,7 @@ void TXSPI_data(unsigned char c)
 }
 
 /*
- * Fonction permettant de recevoir un caractère du maitre
+ * Fonction permettant de recevoir un caractÃ¨re du maitre
  */
 
 unsigned char RXSPI_data()
