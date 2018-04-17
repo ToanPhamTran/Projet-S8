@@ -1,9 +1,20 @@
+/*
+ * @Name : main.c
+ * @Created on: 17 avr. 2018
+ * @Author : PHAM TRAN Toan
+ * @Description : Main program
+ * @Project : HARSH WORK MULTI SENSOR - ESIGELEC PROJECT S8
+ * @Environment : Code composer studio
+ * @GitHub : https://github.com/ToanPhamTran/Projet-S8
+ */
+
 #include <msp430.h> 
 #include <string.h>
 #include <stdio.h>
 #include "capt.h"
 #include "constante.h"
 #include "SPI.h"
+#include "conv.h"
 
 void Send_data_test()
 {
