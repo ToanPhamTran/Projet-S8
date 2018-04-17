@@ -30,23 +30,24 @@ void InitSPI_Port(void)
 }
 
 /*...................................................................................*/
-/* void InitSPI_modet(void)                                           	             */
+/* void InitSPI_mode(void)                                           	             */
 /*...................................................................................*/
 /* Description : Initialize the register use for the SPI mode                        */
 /* Inputs :                                                                          */
 /*         void                                                                      */
-/* Output : void			                                                         */
+/* Output : void			                                             */
 /*...................................................................................*/
 
 void InitSPI_mode(void)
 {
-	/*
-	 * La polarité est configuré par le registre UCCKPL
-	 * on configure le sens de direction de l'envoie du bit ici le bit de poid fort en premier
-	 */
+	/*...........................................................................*/
+	/* La polaritÃ© est configurÃ© par le registre UCCKPL                          */
+	/* on configure le sens de direction de l'envoie du bit ici le bit           */
+	/*de poid fort en premier                                                    */
+	/*.......................................................................... */
 
 	UCA0CTL0 |=  UCMSB + UCSYNC;
-	//UCA0CTL0 |= UCCKPL;
+	/*UCA0CTL0 |= UCCKPL;                                                        */
 	UCA0CTL1 &=~ UCSWRST;
 
 	/*
@@ -56,12 +57,12 @@ void InitSPI_mode(void)
 }
 
 /*...................................................................................*/
-/* void TXSPI_data(uint_8 var)                                           	         */
+/* void TXSPI_data(uint_8 var)                                           	     */
 /*...................................................................................*/
 /* Description : Transmitter the data which is an unsigned 8 bit integer             */
 /* Inputs :                                                                          */
-/*          uint var : data to send to master via SPI                                */
-/* Output : void			                                                         */
+/*          uint_8 var : data to send to master via SPI                              */
+/* Output : void			                                             */
 /*...................................................................................*/
 
 void TXSPI_data(uint_8 var)
@@ -71,16 +72,15 @@ void TXSPI_data(uint_8 var)
 }
 
 /*...................................................................................*/
-/* void RXSPI_data(void)                                           	                 */
+/* void RXSPI_data(void)                                           	             */
 /*...................................................................................*/
-/* Description : Function which receive a data by the Master                         */
-/* Inputs :                                                                          */
-/*          void                                                                     */
-/* Output : return the data receive by the master			                         */
+/* Description : Function which receive a data from the Master                       */
+/* Inputs : void                                                                     */
+/* Output : return the data receive by the master			             */
 /*...................................................................................*/
 
 uint_8 RXSPI_data()
 {
-	//while (!(IFG2 & UCA0RXIFG));
+	/*while (!(IFG2 & UCA0RXIFG));                                               */
 	return UCA0RXBUF;
 }
