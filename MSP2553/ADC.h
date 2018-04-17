@@ -36,9 +36,8 @@ void ADC_Demarrer_conversion(uint_8 voie);
 /* void ADC_Lire_resultat(void)                                                      */
 /*...................................................................................*/
 /* Description : Read the result                                                     */
-/* Inputs :                                                                          */
-/*        unsigned char voie                                                         */
-/* Output : return the conversion value on 10 bit                	                 */
+/* Inputs : void                                                                     */
+/* Output : return the conversion value on 10 bit                	                   */
 /*...................................................................................*/
 
 uint_16 ADC_Lire_resultat ();
