@@ -10,7 +10,7 @@ int main(int argc , char *argv[])
     const int trueFlag =1;
     struct sockaddr_in server , client;
     char *message;
-    int read_size;
+    int read_size,ge;
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
     char caract, buffer[2000],ch;
     FILE *file;
@@ -83,8 +83,9 @@ int main(int argc , char *argv[])
             for(i=file_size;i>=0;i--)
             {
                 //fscanf(file, "%s",buffer);
-                buffer=getc(file);
-                send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
+                ge=getc(file);
+                send(new_socket, ge, sizeof(int),MSG_CONFIRM);
+                //send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
             }
             printf("The file was sent successfully");
             fclose(file);
