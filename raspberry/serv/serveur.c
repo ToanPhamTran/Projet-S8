@@ -14,7 +14,8 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
     char caract, buffer[2000],ch;
     FILE *file;
-    int words = 0;
+    long file_size = 0;
+    char file_name[]="test.csv";
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -62,30 +63,38 @@ int main(int argc , char *argv[])
             puts(message);
             send(new_socket , message , strlen(message),MSG_CONFIRM);
 
-            file=fopen("test.txt","r");
+            file=fopen(file_name,"r");
             if (file==NULL) perror ("Error opening file");
             else
             {
 /*          Counting Nb of words in the file      */
+            fseek(file,0,SEEK_END);
+            file_size=ftell(file);
+            rewind(file);
+            printf ("Size of %s: %ld bytes.\n",file_name,file_size);
 
-            do
+/*          Sending the file      */
+            message = "Sending ";
+            send(new_socket , message , strlen(message),MSG_CONFIRM);
+            send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
+            message = " Bytes\n";
+            send(new_socket , message , strlen(message),MSG_CONFIRM);
+           /* do
             {
                 fscanf(file , "%s" , buffer);
                 if(isspace(caract)||caract=='\t'){
-                words++;
-                printf("%d",words);
+                file_size++;
+                printf("%d",file_size);
                 }
             } while((caract=getc(file))!= NULL);
 
-            send(new_socket, &words, sizeof(int),MSG_CONFIRM);
-            rewind(file);
-/*          Sending the file      */
-           do
+            send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);*/
+
+            for(long i=file_size;i>=0;i--)
             {
                 fscanf(file , "%s" , buffer);
                 send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
-                ch = fgetc(file);
-            } while(ch != NULL);
+            }
             printf("The file was sent successfully");
             fclose(file);
             }
