@@ -28,7 +28,7 @@ int main(int argc , char *argv[])
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htons( 8888 );
 
-    //reutilisation du port
+    //reuse of port
     setsockopt(socket_desc,SOL_SOCKET,SO_REUSEPORT,&trueFlag,sizeof(int));
     //Bind
     if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
@@ -47,8 +47,8 @@ int main(int argc , char *argv[])
     while( (new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
         puts("Connection accepted");
- 	puts(inet_ntoa(client.sin_addr));
-        printf("port %d\n",client.sin_port);
+        //puts(inet_ntoa(client.sin_addr));
+        printf("Address %s\n Port %d\n",inet_ntoa(client.sin_addr),client.sin_port);
 
         //Reply to the client
         message = "Hello I'm the Interface\nDo you want to receive Data? \nType Y/N \nType Z to quit \n";
