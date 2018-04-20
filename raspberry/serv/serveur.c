@@ -47,12 +47,11 @@ int main(int argc , char *argv[])
     while( (new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
         puts("Connection accepted");
-        //puts(inet_ntoa(client.sin_addr));
-        printf("Address %s\n Port %d\n",inet_ntoa(client.sin_addr),client.sin_port);
+        printf("Address %s\nPort %d\n",inet_ntoa(client.sin_addr),client.sin_port);
 
         //Reply to the client
         message = "Hello I'm the Interface\nDo you want to receive Data? \nType Y/N \nType Z to quit \n";
-        write(new_socket , message , strlen(message));
+        send(new_socket , message , strlen(message),MSG_CONFIRM);
 
          while( (read_size = recv(new_socket , client_message , 2000 , 0)) > 0 )
     {
@@ -61,30 +60,32 @@ int main(int argc , char *argv[])
         {
             message = "I will now procede to the Data transfert\n";
             puts(message);
-            write(new_socket , message , strlen(message));
+            send(new_socket , message , strlen(message),MSG_CONFIRM);
 
             file=fopen("test.txt","r");
             if (file==NULL) perror ("Error opening file");
             else
             {
 /*          Counting Nb of words in the file      */
-            while((caract=getc(file))!= EOF)
+
+            do
             {
                 fscanf(file , "%s" , buffer);
                 if(isspace(caract)||caract=='\t'){
                 words++;
                 printf("%d",words);
                 }
-            }
-            write(new_socket, &words, sizeof(int));
+            } while((caract=getc(file))!= NULL);
+
+            send(new_socket, &words, sizeof(int),MSG_CONFIRM);
             rewind(file);
 /*          Sending the file      */
-            while(ch != EOF)
+           do
             {
                 fscanf(file , "%s" , buffer);
-                write(new_socket,buffer,strlen(buffer));
+                send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
                 ch = fgetc(file);
-            }
+            } while(ch != NULL);
             printf("The file was sent successfully");
             fclose(file);
             }
@@ -93,16 +94,15 @@ int main(int argc , char *argv[])
         {
             message = "I will wait for you to be ready\n";
             puts(message);
-            write(new_socket , message , strlen(message));
+            send(new_socket , message , strlen(message),MSG_CONFIRM);
         }
 
 	else if (strpbrk(client_message,quit))
         {
             message = "Thank you, see you soon\n";
             puts(message);
-            write(new_socket , message , strlen(message));
-	    close(new_socket);
-
+            send(new_socket , message , strlen(message),MSG_CONFIRM);
+            close(new_socket);
         }
     }
 
