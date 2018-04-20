@@ -53,7 +53,7 @@ void InitPort_capt(void)
 uint_16 Conv_LUM(void)
 {
 	uint_16 tamp;
-	ADC_Demarrer_conversion(CAPT_LUM);
+	ADC_Demarrer_conversion(3);
 	tamp=ADC_Lire_resultat();
 	return tamp;
 }
@@ -67,10 +67,10 @@ uint_16 Conv_LUM(void)
 /* Output : return tamp a value on 10 bits                					         */
 /*...................................................................................*/
 
-uint_16 Conv_S0(void)
+uint_16 Conv_SO(void)
 {
 	uint_16 tamp;
-	ADC_Demarrer_conversion(CAPT_SO);
+	ADC_Demarrer_conversion(5);
 	tamp=ADC_Lire_resultat();
 	return tamp;
 }
@@ -87,7 +87,7 @@ uint_16 Conv_S0(void)
 uint_16 Conv_VBR(void)
 {
 	uint_16 tamp;
-	ADC_Demarrer_conversion(CAPT_VBR);
+	ADC_Demarrer_conversion(6);
 	tamp=ADC_Lire_resultat();
 	return tamp;
 }
@@ -104,7 +104,7 @@ uint_16 Conv_VBR(void)
 uint_16 Conv_CO(void)
 {
 	uint_16 tamp;
-	ADC_Demarrer_conversion(CAPT_CO);
+	ADC_Demarrer_conversion(7);
 	tamp=ADC_Lire_resultat();
 	return tamp;
 }

@@ -11,40 +11,40 @@
 #include "constante.h"
 
 /*...................................................................................*/
-/* void convert_data1 (int data_hex)                                           	     */
+/* void convert_data1 (int data_16)                                           	     */
 /*...................................................................................*/
 /* Description : convert the value on an unsigned 8 bit integer                      */
 /*               this value has the 5 high bit of the data convert by the ADC        */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16  : data_16 that you want to convert                            */
 /* Output : return data 2 value in unsigned 8 bit integer                            */
 /*...................................................................................*/
 
-uint_8 convert_data1(uint_16 data_hex)
+uint_8 convert_data1(uint_16 data_16)
 {
 	uint_8 data1;
-	data1 = (uint_8)(0xFF & (data_hex >>5));
+	data1 = (uint_8)(0xFF & (data_16 >>5));
 	return data1;
 }
 
 /*...................................................................................*/
-/* void convert_data2 (int data_hex)                                           	     */
+/* void convert_data2 (int data_16)                                           	     */
 /*...................................................................................*/
 /* Description : convert the value on an unsigned 8 bit integer                      */
 /*               this value has the 5 low bit of the data convert by the ADC         */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16 : data_16 that you want to convert                            */
 /* Output : return data 2 value in unsigned 8 bit integer                            */
 /*...................................................................................*/
 
-uint_8 convert_data2 (uint_16 data_hex)
+uint_8 convert_data2 (uint_16 data_16)
 {
 	uint_16 trans = 0xFFE0;
 	uint_16 trans1= 0x001F;
 	uint_16 tamp, tamp1;
 	uint_8  data2;
 
-	tamp= (data_hex | trans);
+	tamp= (data_16 | trans);
 	tamp1 = (tamp & trans1);
 	data2 = (uint_8)(0xFF & tamp1);
 
@@ -52,151 +52,151 @@ uint_8 convert_data2 (uint_16 data_hex)
 }
 
 /*...................................................................................*/
-/* uint_8 control_lum1(uint_16 data_hex)                                           	 */
+/* uint_8 control_lum1(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 001 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16  : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_lum1(uint_16 data_hex)
+uint_8 control_lum1(uint_16 data_16)
 {
 	uint_8 send_data1, var;
-	var = convert_data1(data_hex);
+	var = convert_data1(data_16);
 
-	send_data1= (uint_8)(0xDF & var);
+	send_data1= (uint_8)(0x20 | var);
 
 	return send_data1;
 }
 
 /*...................................................................................*/
-/* uint_8 control_lum2(uint_16 data_hex)                                           	 */
+/* uint_8 control_lum2(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 000 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16: data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_lum2(uint_16 data_hex)
+uint_8 control_lum2(uint_16 data_16)
 {
 	uint_8 send_data2, var;
-	var = convert_data2(data_hex);
+	var = convert_data2(data_16);
 
-	send_data2= (uint_8)(0xFF & var);
+	send_data2= (uint_8)(0x00 | var);
 
 	return send_data2;
 }
 
 /*...................................................................................*/
-/* uint_8 control_so1(uint_16 data_hex)                                           	 */
+/* uint_8 control_so1(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 011 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16  : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_so1(uint_16 data_hex)
+uint_8 control_so1(uint_16 data_16)
 {
 	uint_8 send_data1, var;
-	var = convert_data1(data_hex);
+	var = convert_data1(data_16);
 
-	send_data1= (uint_8)(0xAF & var);
+	send_data1= (uint_8)(0x60 | var);
 
 	return send_data1;
 }
 
 /*...................................................................................*/
-/* uint_8 control_so2(uint_16 data_hex)                                           	 */
+/* uint_8 control_so2(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 010 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16: data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_so2(uint_16 data_hex)
+uint_8 control_so2(uint_16 data_16)
 {
 	uint_8 send_data2, var;
-	var = convert_data2(data_hex);
+	var = convert_data2(data_16);
 
-	send_data2= (uint_8)(0xBF & var);
+	send_data2= (uint_8)(0x40 | var);
 	return send_data2;
 }
 
 /*...................................................................................*/
-/* uint_8 control_vbr1(uint_16 data_hex)                                           	 */
+/* uint_8 control_vbr1(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 101 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16  : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_vbr1(uint_16 data_hex)
+uint_8 control_vbr1(uint_16 data_16)
 {
 	uint_8 send_data1, var;
-	var = convert_data1(data_hex);
+	var = convert_data1(data_16);
 
-	send_data1= (uint_8)(0x5F & var);
+	send_data1= (uint_8)(0xA0 | var);
 
 	return send_data1;
 }
 
 /*...................................................................................*/
-/* uint_8 control_vbr2(uint_16 data_hex)                                           	 */
+/* uint_8 control_vbr2(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 100 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16 : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_vbr2(uint_16 data_hex)
+uint_8 control_vbr2(uint_16 data_16)
 {
 	uint_8 send_data2, var;
-	var = convert_data2(data_hex);
+	var = convert_data2(data_16);
 
-	send_data2= (uint_8)(0x7F & var);
+	send_data2= (uint_8)(0x80 | var);
 	return send_data2;
 }
 
 /*...................................................................................*/
-/* uint_8 control_co1(uint_16 data_hex)                                           	 */
+/* uint_8 control_co1(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 111 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*          data_16  : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_co1(uint_16 data_hex)
+uint_8 control_co1(uint_16 data_16)
 {
 	uint_8 send_data1, var;
-	var = convert_data1(data_hex);
+	var = convert_data1(data_16);
 
-	send_data1= (uint_8)(0x1F & var);
+	send_data1= (uint_8)(0xE0 | var);
 
 	return send_data1;
 }
 
 /*...................................................................................*/
-/* uint_8 control_co2(uint_16 data_hex)                                           	 */
+/* uint_8 control_co2(uint_16 data_16)                                           	 */
 /*...................................................................................*/
 /* Description : add 3 bit of control 110 to the data send                           */
 /* Inputs :                                                                          */
-/*          data hex  : data hex that you want to convert                            */
+/*         data_16  : data_16 that you want to convert                            */
 /* Output : return send_data1, data to send by SPI                                   */
 /*...................................................................................*/
 
-uint_8 control_co2(uint_16 data_hex)
+uint_8 control_co2(uint_16 data_16)
 {
 	uint_8 send_data2, var;
-	var = convert_data2(data_hex);
+	var = convert_data2(data_16);
 
-	send_data2= (uint_8)(0x3F & var);
+	send_data2= (uint_8)(0xC0 | var);
 	return send_data2;
 
 }
