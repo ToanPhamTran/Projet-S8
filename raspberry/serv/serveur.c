@@ -80,7 +80,7 @@ int main(int argc , char *argv[])
             message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
 
-            //for(i=file_size;i>=0;i--)
+            for(i=file_size;i>=0;i--)
             {
                 fgets(buffer,file_size ,file);
                 send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
