@@ -77,22 +77,12 @@ int main(int argc , char *argv[])
             message = "Sending ";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
             send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
-            message = " Bytes\n";
+            message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
-           /* do
-            {
-                fscanf(file , "%s" , buffer);
-                if(isspace(caract)||caract=='\t'){
-                file_size++;
-                printf("%d",file_size);
-                }
-            } while((caract=getc(file))!= NULL);
 
-            send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);*/
-
-            for(i=file_size;i>=0;i--)
+            //for(i=file_size;i>=0;i--)
             {
-                fscanf(file , "%s" , buffer);
+                fgets(buffer,file_size ,file);
                 send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
             }
             printf("The file was sent successfully");
