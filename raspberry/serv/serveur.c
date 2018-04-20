@@ -82,7 +82,8 @@ int main(int argc , char *argv[])
 
             for(i=file_size;i>=0;i--)
             {
-                fgets(buffer,file_size ,file);
+                //fscanf(file, "%s",buffer);
+                buffer=getc(file);
                 send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
             }
             printf("The file was sent successfully");
