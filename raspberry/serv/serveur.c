@@ -84,7 +84,7 @@ int main(int argc , char *argv[])
             {
                 //fscanf(file, "%s",buffer);
                 ge=getc(file);
-                send(new_socket, ge, sizeof(int),MSG_CONFIRM);
+                send(new_socket, &ge, sizeof(int),MSG_CONFIRM);
                 //send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
             }
             printf("The file was sent successfully");
