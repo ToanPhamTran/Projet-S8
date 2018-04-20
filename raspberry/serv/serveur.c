@@ -14,7 +14,7 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
     char caract, buffer[2000],ch;
     FILE *file;
-    long file_size = 0;
+    long file_size = 0,i;
     char file_name[]="test.csv";
 
     //Create socket
@@ -90,7 +90,7 @@ int main(int argc , char *argv[])
 
             send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);*/
 
-            for(long i=file_size;i>=0;i--)
+            for(i=file_size;i>=0;i--)
             {
                 fscanf(file , "%s" , buffer);
                 send(new_socket,buffer,strlen(buffer),MSG_CONFIRM);
