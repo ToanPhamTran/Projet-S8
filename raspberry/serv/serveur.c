@@ -9,10 +9,10 @@ int main(int argc , char *argv[])
     int socket_desc , new_socket , c;
     const int trueFlag =1;
     struct sockaddr_in server , client;
-    char *message,*bit_data;
+    char *message;
     int read_size;
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
-    char caract, buffer[2000],ch;
+    char buffer[2000];
     FILE *file;
     long file_size = 0,file_start,file_end,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
@@ -75,6 +75,7 @@ int main(int argc , char *argv[])
             file_size=file_end-file_start;
 
             rewind(file);
+            printf ("start = %ld end = %ld \n",file_start,file_end);
             printf ("Size of %s: %ld bytes.\n",file_name,file_size);
 
 /*          Sending the file      */
@@ -87,7 +88,7 @@ int main(int argc , char *argv[])
            while(fgets(buffer,2000,file) != NULL)
             {
                 fgets(buffer,2000,file);
-               send(new_socket, &buffer, strlen(buffer),MSG_CONFIRM);
+                send(new_socket, &buffer, strlen(buffer),MSG_CONFIRM);
             }
 
             printf("The file was sent successfully");
