@@ -14,34 +14,34 @@
 #define SPI
 
 /*...................................................................................*/
-/* void InitSPI_Port(void)                                           	               */
+/* void InitSPI_Port(void)                                           	             */
 /*...................................................................................*/
 /* Description : Initialize the pin use for the SPI mode                             */
 /* Inputs :                                                                          */
 /*          void                                                                     */
-/* Output : void		                                                                 */
+/* Output : void		                                                             */
 /*...................................................................................*/
 
 void InitSPI_Port(void);
 
 /*...................................................................................*/
-/* void InitSPI_mode (void)                                           	             */
+/* void InitSPI_modet(void)                                           	             */
 /*...................................................................................*/
 /* Description : Initialize the register use for the SPI mode                        */
 /* Inputs :                                                                          */
 /*         void                                                                      */
-/* Output : void			                                                               */
+/* Output : void			                                                         */
 /*...................................................................................*/
 
 void InitSPI_mode(void);
 
 /*...................................................................................*/
-/* void TXSPI_data(uint_8 var)                                           	           */
+/* void TXSPI_data(uint_8 var)                                           	         */
 /*...................................................................................*/
 /* Description : Transmitter the data which is an unsigned 8 bit integer             */
 /* Inputs :                                                                          */
-/*          uint_! var : data to send to master via SPI                              */
-/* Output : void			                                                               */
+/*          uint var : data to send to master via SPI                                */
+/* Output : void			                                                         */
 /*...................................................................................*/
 
 void TXSPI_data(uint_8 var);
@@ -49,10 +49,10 @@ void TXSPI_data(uint_8 var);
 /*...................................................................................*/
 /* void RXSPI_data(void)                                           	                 */
 /*...................................................................................*/
-/* Description : Function which receive a data from the Master                       */
+/* Description : Function which receive a data by the Master                         */
 /* Inputs :                                                                          */
 /*          void                                                                     */
-/* Output : return the data receive to the master			                               */
+/* Output : return the data receive by the master			                         */
 /*...................................................................................*/
 
 uint_8 RXSPI_data();
