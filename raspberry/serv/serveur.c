@@ -87,7 +87,7 @@ int main(int argc , char *argv[])
 
            while(fgets(buffer,2000,file) != NULL)
             {
-                fgets(buffer,2000,file);
+
                 send(new_socket, &buffer, strlen(buffer),MSG_CONFIRM);
             }
 
