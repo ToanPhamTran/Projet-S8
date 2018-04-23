@@ -9,7 +9,7 @@ int main(int argc , char *argv[])
     int socket_desc , new_socket , c;
     const int trueFlag =1;
     struct sockaddr_in server , client;
-    char *message,bit_data;
+    char *message,*bit_data;
     int read_size;
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
     char caract, buffer[2000],ch;
@@ -84,10 +84,11 @@ int main(int argc , char *argv[])
             message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
 
-            do
-            {   fgets(bit_data,1000,file);
-                send(new_socket, &bit_data, strlen(bit_data),MSG_CONFIRM);
-            }while(fgets(bit_data,1000,file) != NULL);
+           while(fgets(bit_data,100,file) != NULL)
+            {
+                fgets(bit_data,100,file);
+               // send(new_socket, &bit_data, strlen(bit_data),MSG_CONFIRM);
+            }
 
             printf("The file was sent successfully");
             fclose(file);
