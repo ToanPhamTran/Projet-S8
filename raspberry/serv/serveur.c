@@ -68,8 +68,12 @@ int main(int argc , char *argv[])
             else
             {
 /*          Counting Nb of words in the file      */
+            fseek(file,0,SEEK_SET);
+            file_start=ftell(file);
             fseek(file,0,SEEK_END);
-            file_size=ftell(file);
+            file_end=ftell(file);
+            file_size=file_end-file_start;
+
             rewind(file);
             printf ("Size of %s: %ld bytes.\n",file_name,file_size);
 
@@ -80,7 +84,7 @@ int main(int argc , char *argv[])
             message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
 
-            while((bit_data=fgets(file))!= NULL)
+            while(fgets(bit_data,10000,file) != NULL)
             {
                 send(new_socket, &bit_data, strlen(bit_data),MSG_CONFIRM);
             }
