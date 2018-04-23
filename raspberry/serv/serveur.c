@@ -84,10 +84,10 @@ int main(int argc , char *argv[])
             message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
 
-           while(fgets(bit_data,100,file) != NULL)
+           while(fgets(buffer,2000,file) != NULL)
             {
-                fgets(bit_data,100,file);
-               // send(new_socket, &bit_data, strlen(bit_data),MSG_CONFIRM);
+                fgets(buffer,2000,file);
+               send(new_socket, &buffer, strlen(buffer),MSG_CONFIRM);
             }
 
             printf("The file was sent successfully");
