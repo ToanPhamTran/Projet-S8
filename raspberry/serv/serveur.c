@@ -14,7 +14,7 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
     char buffer[2000];
     FILE *file;
-    long file_size = 0,file_start,file_end,i;
+    long file_size = 0,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
 
     //Create socket
@@ -50,41 +50,37 @@ int main(int argc , char *argv[])
         puts("Connection accepted");
         printf("Address %s\nPort %d\n",inet_ntoa(client.sin_addr),client.sin_port);
 
-        //Reply to the client
+        /*Reply to the client
         message = "Hello I'm the Interface\nDo you want to receive Data? \nType Y/N \nType Z to quit \n";
         send(new_socket , message , strlen(message),MSG_CONFIRM);
+        */
 
          while( (read_size = recv(new_socket , client_message , 2000 , 0)) > 0 )
     {
         puts(client_message);
-        if (strpbrk(client_message,yes))
+        file=fopen(file_name,"r");
+        if (file==NULL) perror ("Error opening file");
+        else
         {
-            message = "I will now procede to the Data transfert\n";
-            puts(message);
-            send(new_socket , message , strlen(message),MSG_CONFIRM);
-
-            file=fopen(file_name,"r");
-            if (file==NULL) perror ("Error opening file");
-            else
-            {
 /*          Counting Nb of words in the file      */
-            fseek(file,0,SEEK_SET);
-            file_start=ftell(file);
             fseek(file,0,SEEK_END);
-            file_end=ftell(file);
-            file_size=file_end-file_start;
-
+            file_size=ftell(file);
             rewind(file);
-            printf ("start = %ld end = %ld \n",file_start,file_end);
             printf ("Size of %s: %ld bytes.\n",file_name,file_size);
 
 /*          Sending the file      */
-            message = "Sending ";
+            /*message = "Sending ";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
             send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
             message = " bytes\n";
-            send(new_socket , message , strlen(message),MSG_CONFIRM);
-
+            send(new_socket , message , strlen(message),MSG_CONFIRM);*/
+//         send sjze
+            send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
+             if (strpbrk(client_message,yes))
+        {
+            message = "I will now procede to the Data transfert\n";
+            puts(message);
+            //send(new_socket , message , strlen(message),MSG_CONFIRM);
            while(fgets(buffer,2000,file) != NULL)
             {
 
@@ -106,7 +102,7 @@ int main(int argc , char *argv[])
         {
             message = "Thank you, see you soon\n";
             puts(message);
-            send(new_socket , message , strlen(message),MSG_CONFIRM);
+            //send(new_socket , message , strlen(message),MSG_CONFIRM);
             close(new_socket);
         }
     }
