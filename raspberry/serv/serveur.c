@@ -90,7 +90,6 @@ int main(int argc , char *argv[])
             printf("The file was sent successfully");
             fclose(file);
             }
-        }
         else if (strpbrk(client_message,no))
         {
             message = "I will wait for you to be ready\n";
@@ -104,6 +103,7 @@ int main(int argc , char *argv[])
             puts(message);
             //send(new_socket , message , strlen(message),MSG_CONFIRM);
             close(new_socket);
+        }
         }
     }
 
