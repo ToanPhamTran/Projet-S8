@@ -33,22 +33,16 @@ void ajouter (void)
 	printf("le fichier existe\n");
 	for(i=0;i<5;i++)
 	{
-	 tab[i][j]=fprintf(fichier,"Capteur %d\t",compt);
-	/*tab[0][0]=fputs("Capteur 1\t",fichier);
-	tab[1][0]=fputs("Capteur 2\t",fichier);
-	tab[2][0]=fputs("Capteur 3\t",fichier);
-	tab[3][0]=fputs("Capteur 4\t",fichier);
-	tab[4][0]=fputs("Capteur 5\t",fichier);
-	tab[5][0]=fputs("Date \t",fichier);*/
+	 tab[i][j]=fprintf(fichier,"Capteur %d, ",compt);
 	compt=compt+1;
 	}
-	tab[5][j]=fputs("Date \t\n",fichier);
+	tab[5][j]=fputs("Date, \n",fichier);
 
 	for(j=1;j<5;j++)
 		{
 		for(i=0;i<5;i++)
 			{
-			tab[i][j]=fprintf(fichier,"%d \t",var);
+			tab[i][j]=fprintf(fichier,"%d,",var);
 			}
 		
 		tab[i][j]=fprintf(fichier,"\n");
