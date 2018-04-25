@@ -14,7 +14,7 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z",size[]="S";
     char buffer[2000];
     FILE *file;
-    long file_size = 0 ,i;
+    int file_size = 0 ,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
     char taille_fichier[2000];
 
@@ -68,7 +68,7 @@ int main(int argc , char *argv[])
             file_size=ftell(file);
             rewind(file);
             printf ("Size of %s: %ld bytes.\n",file_name,file_size);
-            taille_fichier << file_size;
+
 /*          Sending the file      */
             /*message = "Sending ";
             send(new_socket , message , strlen(message),MSG_CONFIRM);
@@ -78,8 +78,8 @@ int main(int argc , char *argv[])
 //         send sjze
             if (strpbrk(client_message,size))
         {
-            send(new_socket, &taille_fichier, strlen(taille_fichier),MSG_CONFIRM);
-           // send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
+
+            send(new_socket, &file_size, sizeof(int),MSG_CONFIRM);
 
         }
              if (strpbrk(client_message,yes))
