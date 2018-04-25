@@ -77,7 +77,7 @@ int main(int argc , char *argv[])
 //         send sjze
             if (strpbrk(client_message,size))
         {
-            send(new_socket, &file_size, sizeof(int),MSG_CONFIRM);
+            send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
 
         }
              if (strpbrk(client_message,yes))
