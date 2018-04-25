@@ -14,7 +14,7 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z",size[]="S";
     char buffer[2000];
     FILE *file;
-    char file_size[2000] ,i;
+   long file_size = 0 ,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
 
     //Create socket
@@ -77,8 +77,8 @@ int main(int argc , char *argv[])
 //         send sjze
             if (strpbrk(client_message,size))
         {
-            //send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
-            send(new_socket, &file_size, strlen(file_size),MSG_CONFIRM);
+            send(new_socket, &file_size, sizeof(int),MSG_CONFIRM);
+
         }
              if (strpbrk(client_message,yes))
         {
