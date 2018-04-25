@@ -14,7 +14,7 @@ int main(int argc , char *argv[])
     char client_message[2000],yes[]="Y", no[]="N",quit[]="Z",size[]="S";
     char buffer[2000];
     FILE *file;
-    char file_size[] ,i;
+    char file_size[2000] ,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
 
     //Create socket
