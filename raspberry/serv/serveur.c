@@ -90,7 +90,7 @@ int main(int argc , char *argv[])
                 send(new_socket, &buffer, strlen(buffer),MSG_CONFIRM);
             }
 
-            printf("The file was sent successfully/n");
+            printf("The file was sent successfully\n");
             fclose(file);
             }
         else if (strpbrk(client_message,no))
