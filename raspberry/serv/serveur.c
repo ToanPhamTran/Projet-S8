@@ -16,7 +16,7 @@ int main(int argc , char *argv[])
     FILE *file;
     int file_size = 0 ,i;
     char file_name[]="/home/pi/Projet-S8/raspberry/serv/test.csv";
-    char taille_fichier[2000];
+    string taille_fichier[2000];
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
