@@ -11,7 +11,7 @@ int main(int argc , char *argv[])
     struct sockaddr_in server , client;
     char *message;
     int read_size;
-    char client_message[2000],yes[]="Y", no[]="N",quit[]="Z";
+    char client_message[2000],yes[]="Y", no[]="N",quit[]="Z",size[]="S";
     char buffer[2000];
     FILE *file;
     long file_size = 0,i;
@@ -75,7 +75,10 @@ int main(int argc , char *argv[])
             message = " bytes\n";
             send(new_socket , message , strlen(message),MSG_CONFIRM);*/
 //         send sjze
+            if (strpbrk(client_message,size))
+        {
             send(new_socket, &file_size, sizeof(long),MSG_CONFIRM);
+        }
              if (strpbrk(client_message,yes))
         {
             message = "I will now procede to the Data transfert\n";
