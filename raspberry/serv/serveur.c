@@ -68,6 +68,7 @@ int main(int argc , char *argv[])
             file_size=ftell(file);
             rewind(file);
             printf ("Size of %s: %ld bytes.\n",file_name,file_size);
+            taille_fichier << file_size;
 
 /*          Sending the file      */
             /*message = "Sending ";
@@ -78,8 +79,8 @@ int main(int argc , char *argv[])
 //         send sjze
             if (strpbrk(client_message,size))
         {
-
-            send(new_socket, &file_size, sizeof(int),MSG_CONFIRM);
+            send(new_socket , taille_fichier , strlen(taille_fichier),MSG_CONFIRM);
+            //send(new_socket, &file_size, sizeof(int),MSG_CONFIRM);
 
         }
              if (strpbrk(client_message,yes))
