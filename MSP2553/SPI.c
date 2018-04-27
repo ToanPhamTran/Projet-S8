@@ -43,7 +43,8 @@ void InitSPI_mode(void)
 	 * on configure le sens de direction de l'envoie du bit ici le bit de poid fort en premier
 	 */
 
-	UCA0CTL0 |=  UCMSB + UCSYNC;
+	UCA0CTL0 |= UCSYNC;
+	UCA0CTL0 |= UCMSB;
 	//UCA0CTL0 |= UCCKPL;
 	UCA0CTL1 &=~ UCSWRST;
 
@@ -65,7 +66,7 @@ void InitSPI_mode(void)
 void TXSPI_data(uint_8 var)
 {
 	while (!(IFG2 & UCA0TXIFG));
-	UCA0TXBUF=2*var;
+	UCA0TXBUF= 2*var;
 }
 
 /*...................................................................................*/
