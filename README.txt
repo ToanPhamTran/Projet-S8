@@ -1,3 +1,3 @@
 # Projet-S8
 HARSH WORK MULTI SENSOR 
-ZIP regroup the final project 
+ZIP regroups the final project 
